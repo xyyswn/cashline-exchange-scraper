@@ -1,0 +1,33 @@
+name: Scrape Cashline Rates
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run scraper
+        run: node scrape.js
+
+      - name: Commit updated HTML
+        run: |
+          git config user.name github-actions
+          git config user.email actions@github.com
+          git add public/exchange-rates.html
+          git commit -m "Update exchange rates"
+          git push

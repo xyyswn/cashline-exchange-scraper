@@ -1,0 +1,10 @@
+{
+  "name": "cashline-scraper",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node scrape.js"
+  },
+  "dependencies": {
+    "puppeteer": "^21.3.8"
+  }
+}
